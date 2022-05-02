@@ -90,9 +90,9 @@
     \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
       \addtomaketitle{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
     \ifthenelse{\isundefined{\@email}}{}{\addtomaketitle{\emailsymbol\emaillink{\@email}}}%
-    \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\httplink{\@homepage}}}%
+    \ifthenelse{\isundefined{\@homepage}}{}{\addtomaketitle{\homepagesymbol\href{\@homepage}{\@homepage}}}%
     \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomaketitle{\@extrainfo}}%
-        \ifthenelse{\isundefined{\@github}}{}{\addtomaketitle{\@github}}%
+        \ifthenelse{\isundefined{\@github}}{}{\addtomaketitle{\ghsymbol\httplink{github.com/\@github}}}%
 
     \flushmaketitle}\\[2.5em]}% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \maketitle
 
@@ -165,7 +165,7 @@
   \addcontentsline{toc}{section}{#2}%
   \strut\sectionstyle{#2}%
   {\color{color1}\hrule}%
-  \par\nobreak\addvspace{1ex}\@afterheading}
+  \par\nobreak\addvspace{1ex}\@afterheading\vspace{5pt}}
 
 \newcommand{\subsectionfill}{\xleaders\hbox to 0.35em{\scriptsize.}\hfill}% different subsectionfills will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible
 \RenewDocumentCommand{\subsection}{sm}{%
@@ -196,14 +196,38 @@
     {}%
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemmaincolumnwidth}#3\end{minipage}}}}
 
-\renewcommand*{\cventry}[7][.25em]{
+\renewcommand*{\cventry}[8][.25em]{\vspace{5pt}
+\vbox{
   \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}%
 	  {\bfseries #4} & {\bfseries #5} \\%
-	  {\itshape #3\ifthenelse{\equal{#6}{}}{}{, #6}} & {\itshape #2}\\%
+	  {\itshape #3} & {\itshape #2}\\%
+  \end{tabular*} \\
+ \faLaptopCode{} \small{#6}
+  \ifx&#8&%
+    \else{\\ \faCloud{} \small{#8}}\fi%
+ \vspace{2pt}
+\\\vbox{\small#7}
+  }\vspace{5pt}}
+
+\renewcommand*{\projectentry}[5][.25em]{\vspace{5pt}
+\vbox{
+{\bfseries #2} \\
+\faLaptopCode{} {\itshape #3}
+ \vspace{2pt} \\
+ \vbox{\small#4}
+
+  \small{\faGithub{} \url{#5}}} \vspace{5pt}}
+
+\renewcommand*{\educationentry}[7][.25em]{\vspace{5pt}
+  \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}%
+	  {\bfseries #4} & {\bfseries #5} \\%
+	  {\itshape #3\ifthenelse{\equal{#6} {}}{} 
+	  {, #6}} & {\itshape #2}\\%
   \end{tabular*}%
   \ifx&#7&%
     \else{\\\vbox{\small#7}}\fi%
-  \par\addvspace{#1}}
+\vspace{5pt}}
+
 
 \newbox{\cvitemwithcommentmainbox}
 \newlength{\cvitemwithcommentmainlength}

@@ -266,6 +266,7 @@
 \newcommand*{\faxphonesymbol}{}
 \newcommand*{\emailsymbol}{}
 \newcommand*{\homepagesymbol}{}
+\newcommand*{\ghsymbol}{}
 
 % fonts
 \AtBeginDocument{\normalfont\color{color0}}
@@ -376,9 +377,15 @@
 % usage: \cvlistdoubleitem[label]{item1}{item2}
 \newcommand*{\cvlistdoubleitem}[3][\listitemsymbol]{}
 
-% makes a typical resume job / education entry
+% makes a typical resume job entry
 % usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
-\newcommand*{\cventry}[7][.25em]{}
+\newcommand*{\cventry}[8][.25em]{}
+
+\newcommand*{\projectentry}[5][.25em]{}
+
+% makes a typical resume education entry
+% usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
+\newcommand*{\educationentry}[7][.25em]{}
 
 % makes a resume entry with a proficiency comment
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}
