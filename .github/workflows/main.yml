@@ -11,8 +11,7 @@ jobs:
         with:
           root_file: main.tex
           latexmk_use_lualatex: true
-      - name: Upload PDF file
-        uses: actions/upload-artifact@v3
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: PDF
-          path: main.pdf
+          files: main.pdf
